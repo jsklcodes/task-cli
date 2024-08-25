@@ -23,3 +23,20 @@ export const addTask = async description => {
   await setJSONFileData(tasks)
   console.log(`Task added successfully (ID: ${newTask.id})`)
 }
+
+export const updateTask = async (id, newDescription) => {
+  const tasks = await getJSONFileData()
+
+  if (!id || !newDescription) {
+    console.error(
+      'Provide the necessary parameters. Use `task-cli update <id> <newDescription>`.'
+    )
+    return
+  }
+
+  const taskToUpdate = tasks.find(task => task.id === id)
+
+  taskToUpdate.description = newDescription
+  taskToUpdate.updatedAt = new Date().toISOString()
+  await setJSONFileData(tasks)
+}
