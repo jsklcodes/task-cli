@@ -40,3 +40,17 @@ export const updateTask = async (id, newDescription) => {
   taskToUpdate.updatedAt = new Date().toISOString()
   await setJSONFileData(tasks)
 }
+
+export const deleteTask = async id => {
+  let tasks = await getJSONFileData()
+
+  if (!id) {
+    console.error(
+      'You need to provide an ID for the task. Use `task-cli delete <id>`.'
+    )
+    return
+  }
+
+  tasks = tasks.filter(task => task.id !== id)
+  await setJSONFileData(tasks)
+}
