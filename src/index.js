@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
+import { addTask } from './actions.js'
+
 const init = () => {
   const [command, ...args] = process.argv.slice(2)
 
   const operations = {
-    add: () => console.log('adding'),
+    add: addTask,
     update: () => console.log('updating'),
     delete: () => console.log('deleting'),
     'mark-in-progress': () => console.log('marking as in progress'),
