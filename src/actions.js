@@ -54,3 +54,11 @@ export const deleteTask = async id => {
   tasks = tasks.filter(task => task.id !== id)
   await setJSONFileData(tasks)
 }
+
+export const markTask = async (id, type) => {
+  const tasks = await getJSONFileData()
+  const taskToMark = tasks.find(task => task.id === id)
+
+  taskToMark.status = type
+  await setJSONFileData(tasks)
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { addTask, updateTask, deleteTask } from './actions.js'
+import { addTask, updateTask, deleteTask, markTask } from './actions.js'
 
 const init = () => {
   const [command, ...args] = process.argv.slice(2)
@@ -9,8 +9,8 @@ const init = () => {
     add: addTask,
     update: updateTask,
     delete: deleteTask,
-    'mark-in-progress': () => console.log('marking as in progress'),
-    'mark-done': () => console.log('marking as done'),
+    'mark-in-progress': markTask,
+    'mark-done': markTask,
     list: () => console.log('listing'),
   }
 
@@ -18,13 +18,16 @@ const init = () => {
     return operations[command](args[0])
   }
 
-  if (
-    command === 'list' ||
-    command === 'update' ||
-    command === 'mark-in-progress' ||
-    command === 'mark-done'
-  ) {
+  if (command === 'list' || command === 'update') {
     return operations[command](args[0], args[1])
+  }
+
+  if (command === 'mark-in-progress') {
+    return operations[command](args[0], 'in-progress')
+  }
+
+  if (command === 'mark-done') {
+    return operations[command](args[0], 'done')
   }
 }
 
