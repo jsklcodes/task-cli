@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
-import { addTask, updateTask, deleteTask, markTask } from './actions.js'
+import {
+  addTask,
+  updateTask,
+  deleteTask,
+  markTask,
+  listTask,
+} from './actions.js'
 
 const init = () => {
   const [command, ...args] = process.argv.slice(2)
@@ -11,7 +17,7 @@ const init = () => {
     delete: deleteTask,
     'mark-in-progress': markTask,
     'mark-done': markTask,
-    list: () => console.log('listing'),
+    list: listTask,
   }
 
   if (command === 'add' || command === 'delete') {

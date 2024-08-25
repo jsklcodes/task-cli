@@ -69,3 +69,38 @@ export const markTask = async (id, type) => {
   taskToMark.status = type
   await setJSONFileData(tasks)
 }
+
+export const listTask = async filter => {
+  const tasks = await getJSONFileData()
+  let taskToList = tasks
+  let numberOfTasks = taskToList.length
+
+  if (taskToList.length === 0) {
+    console.log('No tasks found.')
+    return
+  }
+
+  if (filter) {
+    taskToList = tasks.filter(task => task.status === filter)
+    numberOfTasks = taskToList.length
+
+    if (taskToList.length === 0) {
+      console.log(
+        `There is no task with a${
+          filter === 'in-progress' ? 'n' : ''
+        } ${filter} status.`
+      )
+      return
+    }
+  }
+
+  console.log(
+    `\nShowing ${numberOfTasks} task${numberOfTasks > 1 ? 's' : ''}:\n`
+  )
+
+  taskToList.map(task => {
+    console.log(`${task.id} → ${task.description} [${task.status}]`)
+    console.log(`| createdAt: ${task.createdAt}`)
+    console.log(`| updated at: ${task.updatedAt}\n`)
+  })
+}
