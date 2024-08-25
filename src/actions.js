@@ -59,6 +59,13 @@ export const markTask = async (id, type) => {
   const tasks = await getJSONFileData()
   const taskToMark = tasks.find(task => task.id === id)
 
+  if (!id) {
+    console.error(
+      `You need to provide an ID for the task. Use \`task-cli mark-${type} <id>\`.`
+    )
+    return
+  }
+
   taskToMark.status = type
   await setJSONFileData(tasks)
 }
