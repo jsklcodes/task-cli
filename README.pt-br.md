@@ -6,7 +6,7 @@
 
 Task CLI é uma aplicação de linha de comando para gerenciamento de tarefas, desenvolvida em Node.js utilizando apenas módulos nativos.
 
-
+| Este projeto foi desenvolvido para resolver a tarefa do [projeto Task Tracker](https://roadmap.sh/projects/task-tracker) por [roadmap.sh](https://roadmap.sh).
 
 ## Funcionalidades
 
